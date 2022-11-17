@@ -21,10 +21,41 @@ def matchParenthesisOneType(inputStr):
         else:
             return False
 
+def matchParenthesisdifferentType(input):
+    openParenthesis = ['(','[','{']
+    closeParenthesis = [')',']','}']
+    parenList = []
+    for ch in input:
+        if ch in openParenthesis:
+            parenList.append(ch)
+        if ch in closeParenthesis:
+            if len(parenList) == 0:
+                return False
+            else:
+                if ch == ')' and parenList[-1] == '(':
+                    parenList.pop()
+                elif ch == ']' and parenList[-1] == '[':
+                    parenList.pop()
+                elif ch == '}' and parenList[-1] == '{':
+                    parenList.pop()                
+                else:
+                    return False
+    if len(parenList) == 0:
+        return True
+    else:
+        return False
+
+
+
 
 print(matchParenthesisOneType("((a)(b))"))
 
 print(matchParenthesisOneType(" )(ab)"))
 
 print(matchParenthesisOneType(" )(ab)("))
+
+print(matchParenthesisdifferentType("()[]{}"))
+
+print(matchParenthesisdifferentType("(]{}"))
+
 
